@@ -57,19 +57,37 @@ public class TakeYourVitamins {
 		String U;
 		String V;
 		List<String> noSignificantAmount = new ArrayList<String>();
-		while(A >= 0) {
-			String nextLine = in.nextLine();
-			Scanner line = new Scanner(nextLine);
+		
+		List<String> lines = new ArrayList<String>();
+		
+		while(true) {
+			String line = in.nextLine();
+			
+			//if line is not blank
+			if(line.length() > 0) {
+				//if a is not negative
+				if(line.charAt(0) != '-') {
+					lines.add(line);
+					continue;
+				}
+			}
+			break;
+		}
+		
+		System.out.println();
+		
+		for(String line : lines) {
+			Scanner lineScanner = new Scanner(line);
 			
 			//get A, U, and R
-			A = line.nextFloat();
-			U = line.next();
-			R = line.nextFloat();
+			A = lineScanner.nextFloat();
+			U = lineScanner.next();
+			R = lineScanner.nextFloat();
 			
 			//get V (will be the rest of the line)
 			V = "";
-			while(line.hasNext()) {
-				V += line.nextLine();
+			while(lineScanner.hasNext()) {
+				V += lineScanner.nextLine();
 			}
 			
 			//remove extra whitespace at the beginning of V if it exists
