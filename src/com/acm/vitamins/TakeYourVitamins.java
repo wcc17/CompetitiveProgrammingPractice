@@ -1,5 +1,7 @@
 package com.acm.vitamins;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TakeYourVitamins {
@@ -50,17 +52,22 @@ public class TakeYourVitamins {
 //		Fiber
 //		Calcium
 		
-		while(in.hasNextLine()) {
+		float A = 0;
+		float R;
+		String U;
+		String V;
+		List<String> noSignificantAmount = new ArrayList<String>();
+		while(A >= 0) {
 			String nextLine = in.nextLine();
 			Scanner line = new Scanner(nextLine);
 			
 			//get A, U, and R
-			float A = line.nextFloat();
-			String U = line.next();
-			float R = line.nextFloat();
+			A = line.nextFloat();
+			U = line.next();
+			R = line.nextFloat();
 			
 			//get V (will be the rest of the line)
-			String V = "";
+			V = "";
 			while(line.hasNext()) {
 				V += line.nextLine();
 			}
@@ -74,11 +81,21 @@ public class TakeYourVitamins {
 			//multiply by 10 to get percentage
 			float percentageOfMinReq = (A / R) * 100;
 			
-			//output
-			System.out.print(V + " ");
-			System.out.print(A + " ");
-			System.out.print(U + " ");
-			System.out.print((int)percentageOfMinReq + "%"); //cast to int to prevent decimal places (zero digit precision)
+			if(percentageOfMinReq < 1) {
+				noSignificantAmount.add(V);
+			} else {
+				//output
+				System.out.print(V + " ");
+				System.out.print(A + " ");
+				System.out.print(U + " ");
+				System.out.print((int)percentageOfMinReq + "%"); //cast to int to prevent decimal places (zero digit precision)
+				System.out.println();
+			}
+		}
+		
+		System.out.println("Provides no significant amount of:");
+		for(String s : noSignificantAmount) {
+			System.out.println(s);
 		}
 	}
 }
