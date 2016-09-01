@@ -8,6 +8,38 @@ import java.util.Scanner;
 
 public class TakeYourVitamins {
 	
+	/**
+	 *  Input:
+		3500.0 iu 5000.0 Vitamin A
+		400.0 mg 1.0 Cholesterol
+		60.0 mg 60.0 Vitamin C
+		0.15 g 25.0 Fiber
+		0.1 g 25.0 Inert Fiber
+		109. mg 990. Phosphorus
+		0.0 mg 1000.0 Calcium
+		25.0 mg 20.0 Niacin
+		25.0 mcg 81.0 Vitamin K
+		0.0 mg 4000.0 Potassium
+		1.0001 g 100.0 the secret of eternal youth
+		0.99 g 100.0 the secret of eternal happiness
+		-1.0 x 0.0 x
+		
+		Output:
+		Vitamin A 3500.0 iu 70%
+		Cholesterol 400.0 mg 40000%
+		Vitamin C 60.0 mg 100%
+		Phosphorus 109.0 mg 11%
+		Niacin 25.0 mg 125%
+		Vitamin K 25.0 mcg 31%
+		the secret of eternal youth 1.0 g 1%
+		Provides no significant amount of:
+		Fiber
+		Inert Fiber
+		Calcium
+		Potassium
+	 * @param args
+	 */
+	
 	public static void main(String[] args)  {
 		Scanner in = new Scanner(System.in);
 		
