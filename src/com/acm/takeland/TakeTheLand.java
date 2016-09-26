@@ -4,6 +4,17 @@ import java.util.Scanner;
 
 public class TakeTheLand {
 	
+	/*
+6 7
+0 1 1 0 1 1 0
+0 0 0 0 0 1 0
+1 0 0 0 0 0 1
+0 1 0 0 0 0 1
+1 1 0 0 0 1 0
+1 1 0 1 1 0 0
+0 0
+	 */
+	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		while(true) {
@@ -12,6 +23,7 @@ public class TakeTheLand {
 			
 			//end of data?
 			if (numRow == 0 || numCol == 0) {
+				in.close();
 				return;
 			}
 			
@@ -72,10 +84,18 @@ public class TakeTheLand {
 					maxSize = Math.max(maxSize,  maxWidth);
 					
 					//continue down
+					for (int rowDown = 1; rowDown < clearDown[topRow][col]; rowDown++) {
+						maxWidth = Math.min(maxWidth, clearRight[topRow+rowDown][col]);
+						
+						//how big is this rectangle so far
+						int curSize = (rowDown+1) * maxWidth;
+						
+						maxSize = Math.max(curSize, maxSize);
+					}
 				}
 			}
+			
+			System.out.println(maxSize);
 		}
-		
-//		in.close();
 	}
 }
