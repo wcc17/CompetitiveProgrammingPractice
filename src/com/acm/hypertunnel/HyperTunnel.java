@@ -205,11 +205,28 @@ public class HyperTunnel {
 	public static int solve(List<Tunnel> tunnels, int currentSystem, int start, int destination, int numShips, int numSuperComputers) {
 
 		//get possible moves
+		//get the costs for those moves
 		
+		//make sure a tunnel with the same possible cost as another is not repeated
 		List<Tunnel> possibleTunnels = new ArrayList<Tunnel>();
+		List<Integer> possibleCosts = new ArrayList<Integer>();
 		for(Tunnel tunnel : tunnels) {
 			if(tunnel.startSystem == currentSystem) {
-				possibleTunnels.add(tunnel);
+				if(!possibleCosts.contains(tunnel.minDaysToDestination) && !possibleTunnels.contains(tunnel)) {
+					possibleCosts.add(tunnel.minDaysToDestination);
+					possibleTunnels.add(tunnel);
+				}
+			}
+		}
+		
+		//for each possibleTunnel, find out what happens if only that tunnel is chosen, plus what would happen
+		//if the tunnel was chosen with every other combination of tunnels
+		for(int i = 0; i < possibleTunnels.size(); i++) {
+			
+			//try the tunnel by itself
+			
+			for(int j = i; j < possibleTunnels.size(); j++) {
+				//try the tunnel with every other combination of tunnels
 			}
 		}
 		
