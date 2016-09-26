@@ -1,4 +1,4 @@
-package com.acm.hypertunnel;
+package com.operatingsystems.hypertunnel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public class HyperTunnel {
 		starSystems = determineConnectedStarSystems(starSystems, tunnels);
 		
 		for(Tunnel tunnel : tunnels) {
-			determineDaysToDestination(tunnel, tunnels, starSystems, eisiemSolarSystemNumber, 0);
+			tunnel.minDaysToDestination = determineDaysToDestination(tunnel, tunnels, starSystems, eisiemSolarSystemNumber, 0);
 		}
 		System.out.println();
 		
@@ -174,19 +174,45 @@ public class HyperTunnel {
 	
 	//will determine the minimum amount of days it would take to use this tunnel to get to the destination
 	public static int determineDaysToDestination(Tunnel tunnel, List<Tunnel> tunnels, StarSystem[] starSystems, int destination, int days) {
-		int minDays = 999999999;
-		for(Tunnel t : tunnels) {
-			if(tunnel.endSystem == t.startSystem) {
-				int d = determineDaysToDestination(t, tunnels, starSystems, destination, days+1);
-				
-				if(d < minDays) {
-					minDays = d;
+		
+		//for each tunnel
+		//get current tunnels start and end point
+		//find all tunnels whose start points match the current end point
+		//
+		
+		if(tunnel.endSystem == destination) {
+			tunnel.minDaysToDestination = 1;
+			return tunnel.minDaysToDestination;
+		} else {
+			int minDays = 999999999;
+			for(Tunnel t : tunnels) {
+				if(tunnel.endSystem == t.startSystem) {
+					int d = 1 + determineDaysToDestination(t, tunnels, starSystems, destination, days);
+					
+					if(d < minDays) {
+						minDays = d;
+					}
 				}
+			}
+			
+			tunnel.minDaysToDestination = minDays;
+		}
+		
+		
+		return tunnel.minDaysToDestination;
+	}
+	
+	public static int solve(List<Tunnel> tunnels, int currentSystem, int start, int destination, int numShips, int numSuperComputers) {
+
+		//get possible moves
+		
+		List<Tunnel> possibleTunnels = new ArrayList<Tunnel>();
+		for(Tunnel tunnel : tunnels) {
+			if(tunnel.startSystem == currentSystem) {
+				possibleTunnels.add(tunnel);
 			}
 		}
 		
-		tunnel.minDaysToDestination = minDays;
-		
-		return ;
+		return 0;
 	}
 }
