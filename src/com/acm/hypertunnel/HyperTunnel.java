@@ -1,4 +1,4 @@
-package com.operatingsystems.hypertunnel;
+package com.acm.hypertunnel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +83,8 @@ public class HyperTunnel {
 			tunnel.minDaysToDestination = determineDaysToDestination(tunnel, tunnels, starSystems, eisiemSolarSystemNumber, 0);
 		}
 		System.out.println();
+		
+		solve(tunnels, earthSolarSystemNumber, earthSolarSystemNumber, eisiemSolarSystemNumber, 0, numSuperComputers); 
 		
 		//debug determineConnectedStarSystems
 //		for(StarSystem starSystem : starSystems) {
@@ -219,14 +221,23 @@ public class HyperTunnel {
 			}
 		}
 		
-		//for each possibleTunnel, find out what happens if only that tunnel is chosen, plus what would happen
-		//if the tunnel was chosen with every other combination of tunnels
+		
+		ArrayList<ArrayList<Tunnel>> tunnelsToAttempt = new ArrayList<ArrayList<Tunnel>>();
 		for(int i = 0; i < possibleTunnels.size(); i++) {
+			//need to do the tunnel, then start adding other tunnels one by one
+			ArrayList<Tunnel> firstTunnelAttempt = new ArrayList<Tunnel>();
+			firstTunnelAttempt.add(possibleTunnels.get(i));
 			
-			//try the tunnel by itself
+			if(!tunnelsToAttempt.contains(firstTunnelAttempt)) {
+				tunnelsToAttempt.add(firstTunnelAttempt);
+			}
 			
-			for(int j = i; j < possibleTunnels.size(); j++) {
-				//try the tunnel with every other combination of tunnels
+			for(int j = 1; j < possibleTunnels.size(); j++) {
+				ArrayList<Tunnel> t = new ArrayList<Tunnel>();
+//				t.add(firstTunnelAttempt);
+				for(int k = 1; k < j; k++) {
+					
+				}
 			}
 		}
 		
